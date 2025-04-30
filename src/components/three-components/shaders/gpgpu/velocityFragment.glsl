@@ -11,7 +11,7 @@ void main() {
         sin(time * 0.5) * 0.05
     );
 
-    vel.xyz += force * 0.01;
+    vel.xyz += force * 0.001;
     vel.xyz *= 0.98;
 
     gl_FragColor = vel;

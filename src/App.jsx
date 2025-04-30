@@ -9,17 +9,11 @@ function App() {
 
   return (
     <>
-      <Canvas
-        orthographic
-        camera={{
-          position: [0, 0, 1500],
-          zoom: 1,
-          near: 0.1,
-          far: 10000,
-        }}
-      >
-        <OrbitControls enableRotate={false} enablePan={false} />
+      <Canvas>
+        <OrbitControls />
         <PosterPlane />
+        <ambientLight intensity={0.5} />
+          <pointLight position={[10, 10, 10]} intensity={1} />
       </Canvas>
     </>
   )
