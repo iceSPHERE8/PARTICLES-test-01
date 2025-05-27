@@ -1,7 +1,7 @@
 import { Canvas } from '@react-three/fiber'
 import { OrbitControls } from '@react-three/drei'
 
-import PosterPlane from './components/three-components/poster-plane'
+import Particles from './components/three-components/particles'
 
 import './App.css'
 
@@ -11,7 +11,7 @@ function App() {
     <>
       <Canvas>
         <OrbitControls />
-        <PosterPlane />
+        <Particles />
         <ambientLight intensity={0.5} />
           <pointLight position={[10, 10, 10]} intensity={1} />
       </Canvas>

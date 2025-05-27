@@ -1,43 +1,25 @@
-// uniform float uTime;
-
-attribute float lifetime;
-attribute float initialLifetime;
-attribute vec3 velocity;
-uniform float time;
-varying float vLifetime;
+uniform sampler2D texturePosition;
+uniform sampler2D textureLife;
+uniform float pointSize;
 
 varying vec2 vUv;
-varying vec3 vPosition;
+varying float vSize;
+varying vec3 vPos;
 
-#include "./curlNoise.glsl"
-// #include "./perlinNoise.glsl"
+float map(float value, float inMin, float inMax, float outMin, float outMax) {
+  return outMin + (value - inMin) * (outMax - outMin) / (inMax - inMin);
+}
 
 void main() {
-    // vec4 mvPosition = viewMatrix * modelMatrix * vec4(position, 1.0);
+  vec4 pos = texture2D(texturePosition, uv);
+  vec4 life = texture2D(textureLife, uv);
 
-    // vec3 noiseFactor = curlNoise(position.xyz * 0.1 + uTime * 0.1) - vec3(0.5);
-    // float distortion = snoise(position.xyz * 0.005 + uTime * 0.2) - 0.5;
-    // mvPosition.xyz += vec3(distortion, distortion, 0.0) * 100.0;
-    // mvPosition.xyz += noiseFactor * 100.0;
+  gl_Position = projectionMatrix * modelViewMatrix * vec4(pos.xyz, 1.0);
 
-    // gl_Position = projectionMatrix * mvPosition;
-    // gl_PointSize = 2.0;
+  float size = pointSize * 2.0;
+  gl_PointSize = size;
 
-             vLifetime = lifetime / initialLifetime;
-          
-          // 根据速度和时间更新位置
-          vec3 newPosition = position + velocity * time;
-          
-          // 重置粒子位置和时间
-          float t = mod(time, initialLifetime);
-          if (t > lifetime) {
-            newPosition = position;
-          }
-          
-          vec4 mvPosition = modelViewMatrix * vec4(newPosition, 1.0);
-          gl_PointSize = 5.0 * vLifetime; // 根据寿命调整大小
-          gl_Position = projectionMatrix * mvPosition;
-
-    vUv = uv;
-    vPosition = position.xyz;
+  vSize = size;
+  vUv = uv;
+  vPos = pos.xyz;
 }
