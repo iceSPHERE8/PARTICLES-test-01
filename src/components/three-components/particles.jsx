@@ -82,8 +82,8 @@ export default function PosterPlane() {
       velocityData[index + 3] = 1.0;
 
       // Randomize initial life
-      lifeData[index + 0] = 5.0 - Math.random() * 1.5;
-      lifeData[index + 1] = 5.0 - Math.random() * 1.5;
+      lifeData[index + 0] = 5.0 - Math.random(i * 256) * 2.5;
+      lifeData[index + 1] = 5.0 - Math.random(i * 256) * 2.5;
       lifeData[index + 2] = 0.0;
       lifeData[index + 3] = 1.0;
     }
@@ -227,6 +227,7 @@ export default function PosterPlane() {
       vertexShader: vertextShader,
       fragmentShader: fragmentShader,
       transparent: true,
+      // sblending: THREE.AdditiveBlending,
     });
   }, []);
 

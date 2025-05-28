@@ -27,5 +27,5 @@ void main() {
     vec3 color = texture2D(utexture, vec2(vUv.x, 1.0 - vUv.y)).rgb;
 
     // gl_FragColor = vec4(vec3(vec2(vUv.x, vUv.y * 1.0), 0.0), 0.8);
-    gl_FragColor = vec4(color, 1.0);
+    gl_FragColor = vec4(color, 0.5);
 }

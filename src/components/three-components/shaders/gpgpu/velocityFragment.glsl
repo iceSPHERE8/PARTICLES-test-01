@@ -8,7 +8,7 @@ void main() {
     vec4 vel = texture2D(textureVelocity, uv);
     vec4 life = texture2D(textureLife, uv);
 
-    vec3 force = curlNoise(vec3(pos.x + time, pos.y, pos.z) * 0.05);
+    vec3 force = curlNoise(vec3(pos.x + time * 10.0, pos.y, pos.z) * 0.05);
 
     vel.xyz += force * 0.1;
     vel.xyz *= 0.97;

@@ -8,16 +8,16 @@ void main() {
     vec4 life = texture2D(textureLife, uv);
 
     // Update position
-    pos.xyz += vel.xyz * 0.01;
+    pos.xyz += vel.xyz * 0.1;
     
 
     if(life.x <= 0.0 || life.z > 0.0) {
         pos.xyz = initialPos.xyz;
     }
 
-    float mixFactor = distance(uv, vec2(0.5));
+    float mixFactor = smoothstep(0.2, 0.8, distance(uv, vec2(0.5)));
 
-    vec4 newPos = mix(pos, initialPos, vec4(1.0));
+    vec4 newPos = mix(pos, initialPos, mixFactor);
 
     gl_FragColor = newPos;
 }
