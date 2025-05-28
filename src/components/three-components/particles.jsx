@@ -22,16 +22,16 @@ export default function PosterPlane() {
 
   const initialPositionVariable = useRef();
 
-  const PARTICLE_COUNT = 640 * 808;
+  const PARTICLE_COUNT = 1280 * 1615;
   // const TEXTURE_WIDTH = Math.ceil(Math.sqrt(PARTICLE_COUNT));
   // const TEXTURE_HEIGHT = TEXTURE_WIDTH;
 
-  const TEXTURE_WIDTH = 641;
-  const TEXTURE_HEIGHT = 808;
+  const TEXTURE_WIDTH = 1281;
+  const TEXTURE_HEIGHT = 1615;
 
   const mainImage = useTexture("./13af905c382ab964d2cf4fe98615deb2.jpg");
 
-  const newGeometry = new THREE.PlaneGeometry(64, 80, 640, 807);
+  const newGeometry = new THREE.PlaneGeometry(64, 80, 1280, 1614);
   const newPos = newGeometry.attributes.position.array;
 
   useEffect(() => {
@@ -227,7 +227,7 @@ export default function PosterPlane() {
       vertexShader: vertextShader,
       fragmentShader: fragmentShader,
       transparent: true,
-      // sblending: THREE.AdditiveBlending,
+      // blending: THREE.AdditiveBlending,
     });
   }, []);
 

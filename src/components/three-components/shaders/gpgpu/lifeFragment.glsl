@@ -6,7 +6,7 @@ void main() {
 
     life.x -= delta;
 
-    if(life.x <= 0.0) {
+    if(life.x < 0.0) {
         life.x = life.y;
         life.z = 1.0;
     } else if(life.z > 0.0) {

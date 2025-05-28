@@ -11,7 +11,7 @@ void main() {
     pos.xyz += vel.xyz * 0.1;
     
 
-    if(life.x <= 0.0 || life.z > 0.0) {
+    if(life.x < 0.0 || life.z > 0.0) {
         pos.xyz = initialPos.xyz;
     }
 
