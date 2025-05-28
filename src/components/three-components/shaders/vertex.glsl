@@ -17,7 +17,7 @@ void main() {
   gl_Position = projectionMatrix * modelViewMatrix * vec4(pos.xyz, 1.0);
 
   float newLife = life.x;
-  float size = 2.0 * newLife;
+  float size = 1.5 * newLife;
   // float restSize = pointSize * 2.0;
   // float mixFactor = smoothstep(0.0, 0.8, distance(uv, vec2(0.5)));
 

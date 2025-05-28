@@ -30,6 +30,7 @@ export default function PosterPlane() {
   const TEXTURE_HEIGHT = 1615;
 
   const mainImage = useTexture("./13af905c382ab964d2cf4fe98615deb2.jpg");
+  const mask = useTexture("./mask.jpg");
 
   const newGeometry = new THREE.PlaneGeometry(64, 80, 1280, 1614);
   const newPos = newGeometry.attributes.position.array;
@@ -145,6 +146,7 @@ export default function PosterPlane() {
     positionVariable.current.material.uniforms = {
       time: { value: 0.0 },
       delta: { value: 0.0 },
+      maskTexture: { value: mask }
     };
     velocityVariable.current.material.uniforms = {
       time: { value: 0.0 },
@@ -266,6 +268,7 @@ export default function PosterPlane() {
   return (
     <>
       <points ref={points} geometry={geometry} material={material} />
+      
     </>
   );
 }

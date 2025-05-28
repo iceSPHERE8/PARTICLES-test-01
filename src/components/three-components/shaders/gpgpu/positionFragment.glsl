@@ -1,4 +1,5 @@
 uniform float time;
+uniform sampler2D maskTexture;
 
 void main() {
     vec2 uv = gl_FragCoord.xy / resolution.xy;
@@ -15,9 +16,10 @@ void main() {
         pos.xyz = initialPos.xyz;
     }
 
+    float mask = texture2D(maskTexture, uv).r;
     float mixFactor = smoothstep(0.2, 0.8, distance(uv, vec2(0.5)));
 
-    vec4 newPos = mix(pos, initialPos, mixFactor);
+    vec4 newPos = mix(pos, initialPos, mask);
 
     gl_FragColor = newPos;
 }
