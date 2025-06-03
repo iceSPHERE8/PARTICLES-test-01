@@ -12,7 +12,9 @@ import vertextShader from "./shaders/vertex.glsl";
 import fragmentShader from "./shaders/fragment.glsl";
 import * as THREE from "three";
 
-export default function PosterPlane() {
+export default function Particles(props) {
+  const {drawTexture} = props;
+
   const { gl } = useThree();
   const points = useRef();
   const gpuCompute = useRef();
@@ -30,7 +32,7 @@ export default function PosterPlane() {
   const TEXTURE_HEIGHT = 1615;
 
   const mainImage = useTexture("./13af905c382ab964d2cf4fe98615deb2.jpg");
-  const mask = useTexture("./mask.jpg");
+  const mask = drawTexture;
 
   const newGeometry = new THREE.PlaneGeometry(64, 80, 1280, 1614);
   const newPos = newGeometry.attributes.position.array;
@@ -244,6 +246,7 @@ export default function PosterPlane() {
         gpuCompute.current.getCurrentRenderTarget(
           positionVariable.current
         ).texture;
+      
       points.current.material.uniforms.textureVelocity.value =
         gpuCompute.current.getCurrentRenderTarget(
           velocityVariable.current
