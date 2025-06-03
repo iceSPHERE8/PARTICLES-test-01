@@ -4,6 +4,7 @@ uniform sampler2D utexture;
 
 varying vec2 vUv;
 varying float vLife;
+varying float vMask;
 
 void main() {
     vec4 life = texture2D(textureLife, vUv);
@@ -15,7 +16,10 @@ void main() {
         discard;
     }
 
-    vec3 color = texture2D(utexture, vec2(vUv.x, 1.0 - vUv.y)).rgb;
+    vec3 color1 = texture2D(utexture, vec2(vUv.x, 1.0 - vUv.y)).rgb;
+    vec3 color2 = texture2D(utexture, vec2(vUv.x, 1.0 - vUv.y)).rgb * 1.5;
+
+    vec3 color = mix(color2, color1, vMask);
 
     gl_FragColor = vec4(color, 1.0);
 }

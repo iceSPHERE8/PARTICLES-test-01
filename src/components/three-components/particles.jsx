@@ -13,7 +13,7 @@ import fragmentShader from "./shaders/fragment.glsl";
 import * as THREE from "three";
 
 export default function Particles(props) {
-  const {drawTexture} = props;
+  // const {drawTexture} = props;
 
   const { gl } = useThree();
   const points = useRef();
@@ -24,17 +24,23 @@ export default function Particles(props) {
 
   const initialPositionVariable = useRef();
 
-  const PARTICLE_COUNT = 1280 * 1615;
+  const particles = {
+    width: 1280,
+    height: 1615
+  }
+
+  const PARTICLE_COUNT = particles.width * particles.height;
   // const TEXTURE_WIDTH = Math.ceil(Math.sqrt(PARTICLE_COUNT));
   // const TEXTURE_HEIGHT = TEXTURE_WIDTH;
 
-  const TEXTURE_WIDTH = 1281;
-  const TEXTURE_HEIGHT = 1615;
+  const TEXTURE_WIDTH = particles.width + 1;
+  const TEXTURE_HEIGHT = particles.height + 1;
 
   const mainImage = useTexture("./13af905c382ab964d2cf4fe98615deb2.jpg");
-  const mask = drawTexture;
+  // const mask = drawTexture;
+  const mask = useTexture("./mask.jpg");
 
-  const newGeometry = new THREE.PlaneGeometry(64, 80, 1280, 1614);
+  const newGeometry = new THREE.PlaneGeometry(64, 81, particles.width, particles.height);
   const newPos = newGeometry.attributes.position.array;
 
   useEffect(() => {
@@ -227,6 +233,7 @@ export default function Particles(props) {
         time: { value: 0 },
         utexture: { value: mainImage },
         pointSize: { value: 2 },
+        maskTexture: { value: mask },
       },
       vertexShader: vertextShader,
       fragmentShader: fragmentShader,

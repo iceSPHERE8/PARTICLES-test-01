@@ -16,7 +16,8 @@ void main() {
         pos.xyz = initialPos.xyz;
     }
 
-    float mask = texture2D(maskTexture, uv).r;
+    vec2 maskUv = vec2(uv.x, 1.0 - uv.y);
+    float mask = texture2D(maskTexture, maskUv).r;
     float mixFactor = smoothstep(0.2, 0.8, distance(uv, vec2(0.5)));
 
     vec4 newPos = mix(pos, initialPos, mask);
