@@ -94,6 +94,8 @@ export default function Scene(props) {
   //   }
   // });
 
+  const { particlesTexture, particlesMask } = props;
+
   return (
     <EffectComposer>
       <Autofocus bokehScale={ 5 } target={ [0, 0, 0] } />
@@ -101,7 +103,7 @@ export default function Scene(props) {
 
       {/* OrbitControls from @react-three/drei automatically hooks into the camera and canvas */}
       <OrbitControls enableRotate={false} />
-      <Particles />
+      <Particles particlesTexture={particlesTexture} particlesMask={particlesMask} />
       {/* <mesh position={[0, 0, 1]} ref={planeRef} visible={false}>
         <planeGeometry args={[64, 81, 2, 2]} />
         <meshBasicMaterial color={"white"} />

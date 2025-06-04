@@ -1,4 +1,4 @@
-// import { useState, useRef, useEffect } from "react";
+import { useEffect, useState } from "react";
 // import * as THREE from "three";
 
 import { Canvas } from "@react-three/fiber";
@@ -6,7 +6,24 @@ import "./App.css";
 
 import Scene from "./components/three-components/Scene";
 
+import DropzoneComponent from "./components/DropzoneComponent";
+
 function App() {
+  const [uploadedTexture, setUploadTexture] = useState(null);
+  const [uploadedMask, setUploadMask] = useState(null);
+
+  const promoteTexture = (data) => {
+    setUploadTexture(data);
+  }
+
+  const promoteMask = (data) => {
+    setUploadMask(data);
+  }
+
+  useEffect(() => {
+    console.log(uploadedTexture, uploadedMask)
+  }, [uploadedTexture, uploadedMask])
+
   // const canvasRef = useRef();
 
   // const [canvasCursor, setCanvasCursor] = useState(null);
@@ -57,10 +74,14 @@ function App() {
 
   return (
     <>
-      <Canvas camera={{ fov: 75, near: 0.1, far: 1000, position: [0, 0, 75] }}>
-        <Scene 
-          // transferCanvasCursor={transferCanvasCursor} 
-          // drawingTexture={drawingTexture} 
+      <Canvas 
+        camera={{ fov: 75, near: 0.1, far: 1000, position: [0, 0, 75] }}
+      >
+        <Scene
+        // transferCanvasCursor={transferCanvasCursor}
+        // drawingTexture={drawingTexture}
+        particlesTexture={uploadedTexture}
+        particlesMask={uploadedMask}
         />
       </Canvas>
       {/* <canvas
@@ -75,6 +96,19 @@ function App() {
         }}
         ref={canvasRef}
       /> */}
+      <div
+        style={{
+          position: "fixed",
+          bottom: 0,
+          display: "flex",
+          justifyContent: "center",
+          margin: "10px",
+          width: "100%"
+        }}
+      >
+        <DropzoneComponent promoteTexture={promoteTexture} displayText = {'图片'} />
+        <DropzoneComponent promoteMask={promoteMask} displayText = {'遮罩'} />
+      </div>
     </>
   );
 }
