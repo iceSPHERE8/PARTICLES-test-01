@@ -63,8 +63,8 @@ export default function Particles(props) {
       setMainTexture(tex);
       if (tex.image) {
         setTextureSize({
-          width: tex.image.width * 2,
-          height: tex.image.height * 2 + 1,
+          width: tex.image.width,
+          height: tex.image.height + 1,
         });
       }
     };
@@ -270,6 +270,7 @@ export default function Particles(props) {
     };
     lifeVariable.current.material.uniforms = {
       delta: { value: 0.0 },
+      maskTexture: { value: maskTexture },
     };
 
     gpuCompute.current.init();

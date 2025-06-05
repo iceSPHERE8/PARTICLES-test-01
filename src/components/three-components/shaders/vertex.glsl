@@ -6,6 +6,7 @@ varying vec2 vUv;
 varying float vLife;
 varying vec3 vPos;
 varying float vMask;
+varying float vSize;
 
 float map(float value, float inMin, float inMax, float outMin, float outMax) {
   return outMin + (value - inMin) * (outMax - outMin) / (inMax - inMin);
@@ -20,6 +21,7 @@ void main() {
 
   float newLife = life.x;
   float restSize = 5.0;
+  
   float size = 1.5 * newLife;
 
   float finalSize = mix(size, restSize, mask);
@@ -30,6 +32,7 @@ void main() {
   // float newSize = mix(size, restSize, mixFactor);
   gl_PointSize = finalSize;
 
+  vSize = finalSize;
   vLife = newLife;
   vUv = uv;
   vPos = pos.xyz;

@@ -1,8 +1,10 @@
 uniform float delta;
+uniform sampler2D maskTexture;
 
 void main() {
     vec2 uv = gl_FragCoord.xy / resolution.xy;
     vec4 life = texture2D(textureLife, uv);
+    vec4 restLife = texture2D(textureLife, uv);
 
     life.x -= delta;
 
@@ -13,5 +15,10 @@ void main() {
         life.z = 0.0;
     }
 
-    gl_FragColor = life;
+    vec2 maskUv = vec2(uv.x, 1.0 - uv.y);
+    float mask = texture2D(maskTexture, maskUv).r;
+
+    vec4 newLife = mix(life,restLife, mask);
+
+    gl_FragColor = newLife;
 }

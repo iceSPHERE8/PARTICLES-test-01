@@ -21,5 +21,6 @@ void main() {
             (fract(sin(seed + 5.0) * 43578.5453) - 0.5) * 0.1
         );
     } 
+    
     gl_FragColor = vel;
 }

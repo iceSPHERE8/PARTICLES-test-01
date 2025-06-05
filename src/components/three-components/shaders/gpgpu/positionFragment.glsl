@@ -12,13 +12,12 @@ void main() {
     pos.xyz += vel.xyz * 0.1;
     
 
-    if(life.x < 0.0 || life.z > 0.0) {
+    if(life.x < 0.1 || life.z > 0.0) {
         pos.xyz = initialPos.xyz;
     }
 
     vec2 maskUv = vec2(uv.x, 1.0 - uv.y);
     float mask = texture2D(maskTexture, maskUv).r;
-    float mixFactor = smoothstep(0.2, 0.8, distance(uv, vec2(0.5)));
 
     vec4 newPos = mix(pos, initialPos, mask);
 
