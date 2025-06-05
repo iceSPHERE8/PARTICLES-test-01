@@ -98,8 +98,8 @@ export default function Scene(props) {
 
   return (
     <EffectComposer>
-      <Autofocus bokehScale={ 5 } target={ [0, 0, 0] } />
-      <Bloom mipmapBlur luminanceThreshold={ 1.2 } luminanceSmoothing={ 0.1 } height={500} />
+      <Autofocus bokehScale={ 1.0 } target={ [0, 0, 0] } smoothness={0.1} />
+      <Bloom mipmapBlur luminanceThreshold={ 1.1 } luminanceSmoothing={ 0.1 } height={500} />
 
       {/* OrbitControls from @react-three/drei automatically hooks into the camera and canvas */}
       <OrbitControls enableRotate={false} />

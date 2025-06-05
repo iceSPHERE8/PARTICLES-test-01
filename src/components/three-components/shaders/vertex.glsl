@@ -3,10 +3,8 @@ uniform sampler2D textureLife;
 uniform sampler2D maskTexture;
 
 varying vec2 vUv;
-varying float vLife;
-varying vec3 vPos;
 varying float vMask;
-varying float vSize;
+varying float vLife;
 
 float map(float value, float inMin, float inMax, float outMin, float outMax) {
   return outMin + (value - inMin) * (outMax - outMin) / (inMax - inMin);
@@ -32,9 +30,7 @@ void main() {
   // float newSize = mix(size, restSize, mixFactor);
   gl_PointSize = finalSize;
 
-  vSize = finalSize;
-  vLife = newLife;
   vUv = uv;
-  vPos = pos.xyz;
   vMask = mask;
+  vLife = newLife;
 }
